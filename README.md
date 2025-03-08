@@ -7,6 +7,7 @@ Macinate is a lightweight Mac menu bar app designed to keep your Mac awake. This
 ![Screenshot 2025-03-08 at 7 26 25 PM](https://github.com/user-attachments/assets/000deeb0-f068-4244-8bc4-7a16b4c85aae)
 
 [Get Macinate](https://github.com/milestones14/Macinate/releases)
+
 ---
 
 ### Features
