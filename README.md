@@ -2,7 +2,7 @@
 
 Macinate is a lightweight Mac menu bar app designed to keep your Mac awake. This is particularly useful if you're installing software, executing terminal commands, or performing other tasks that require your Mac to stay active without interruption.
 
-![](https://img.shields.io/github/license/milestones14/Macinate.svg) ![](https://img.shields.io/github/v/release/milestones14/Macinate.svg) ![](https://img.shields.io/github/downloads/milestones14/Macinate/total.svg) ![](https://img.shields.io/github/issues/milestones14/Macinate.svg) ![](https://img.shields.io/github/issues-pr/milestones14/Macinate.svg) ![](https://img.shields.io/github/contributors/milestones14/Macinate.svg)
+<!--![](https://img.shields.io/github/license/milestones14/Macinate.svg) ![](https://img.shields.io/github/v/release/milestones14/Macinate.svg) ![](https://img.shields.io/github/downloads/milestones14/Macinate/total.svg) ![](https://img.shields.io/github/issues/milestones14/Macinate.svg) ![](https://img.shields.io/github/issues-pr/milestones14/Macinate.svg) ![](https://img.shields.io/github/contributors/milestones14/Macinate.svg)-->
 
 ![Screenshot 2025-03-08 at 7 26 25 PM](https://github.com/user-attachments/assets/000deeb0-f068-4244-8bc4-7a16b4c85aae)
 
