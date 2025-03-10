@@ -15,22 +15,24 @@ struct MenuBarApp: App {
     }
 }
 
-class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
+class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject, NSWindowDelegate {
     var statusItem: NSStatusItem?
     @Published var isRunning: Bool = false  // Tracks the caffeination status
     
     // Retain the process if caffeinate is running
     private var caffeinateProcess: Process?
     private var cancellables = Set<AnyCancellable>()
+    var windowController: NSWindowController?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         // Set the app to open at login if possible.
         setAppToOpenAtLoginIfNeeded()
-        
+        print((self as (any ObservableObject)).objectWillChange)
+        print(self)
         // Create the menu bar item as usual …
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         if let button = statusItem?.button {
-            button.image = NSImage(systemSymbolName: "cup.and.saucer", accessibilityDescription: "Macinate")
+            button.image = NSImage(systemSymbolName: isRunning ? "cup.and.saucer.fill" : "cup.and.saucer", accessibilityDescription: "Macinate")
             button.image?.isTemplate = true
         }
         
@@ -49,6 +51,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
         menu.addItem(actionMenuItem)
         
         menu.addItem(NSMenuItem.separator())
+        menu.addItem(NSMenuItem(title: "Preferences", action: #selector(openSettingsWindow), keyEquivalent: ","))
         menu.addItem(NSMenuItem(title: "Quit", action: #selector(quitApp), keyEquivalent: "q"))
         statusItem?.menu = menu
         
@@ -62,6 +65,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
                     accessibilityDescription: running ? "Caffeinated" : "Decaffeinated"
                 )
                 actionMenuItem.title = running ? "Decaffeinate" : "Caffeinate"
+                if let button = self.statusItem?.button {
+                    button.image = NSImage(systemSymbolName: running ? "cup.and.saucer.fill" : "cup.and.saucer", accessibilityDescription: "Macinate")
+                    button.image?.isTemplate = true
+                }
             }
             .store(in: &cancellables)
     }
@@ -78,6 +85,28 @@ class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
         }
     }
     
+    // MARK: - Menu Actions
+    
+    @objc func openSettingsWindow() {
+            if windowController == nil {
+                // Create the SwiftUI view, passing bindings for "Yes/No" text and icon type
+                let contentView = SettingsView()
+
+                let window = NSWindow(
+                    contentRect: NSRect(x: 0, y: 0, width: 400, height: 300),
+                    styleMask: [.titled, .closable, .resizable],
+                    backing: .buffered,
+                    defer: false
+                )
+                window.title = "Settings"
+                window.center()
+                window.contentViewController = NSHostingController(rootView: contentView)
+                window.delegate = self
+
+                windowController = NSWindowController(window: window)
+            }
+            windowController?.showWindow(nil)
+        }
     @objc func toggleCaffeinate() {
         if isRunning {
             decaffeinate()
