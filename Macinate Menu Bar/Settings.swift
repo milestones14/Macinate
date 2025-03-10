@@ -1,10 +1,3 @@
-//
-//  Settings.swift
-//  Macinate Menu Bar
-//
-//  Created by Meilo H. on 3/10/25.
-//
-
 import SwiftUI
 import ServiceManagement
 
