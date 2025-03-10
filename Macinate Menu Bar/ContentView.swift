@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  Macinate Menu Bar
-//
-//  Created by Meilo H. on 3/8/25.
-//
-
 import SwiftUI
 
 struct ContentView: View {
